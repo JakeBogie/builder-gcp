@@ -4,7 +4,7 @@ region = "REGION"
 zones = ["ZONE", "ZONE", "ZONE"]
 dns_suffix = "SUB.DOMAIN.IO"
 opsman_image_url = "https://storage.googleapis.com/YOUR.OPSMAN.IMAGE.URL"
-buckets_location = "US"
+buckets_location = "us"
 
 ssl_cert = <<SSL_CERT
 *PASTE CERT HERE*

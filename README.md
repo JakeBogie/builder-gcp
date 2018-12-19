@@ -23,7 +23,7 @@ Login to your GCP console and search for APIs & Services.
   - Compute Engine API
 
 ### GCP Service Account Setup:
-Perform the following steps in the 'keys' directory and replace the variable `GCP-PROJECT` with your GCP project ID.
+Perform the following steps in the 'keys' directory and replace the variable `GCP-PROJECT` in the following commands with your GCP project ID.
 ```
 gcloud iam service-accounts create pcf-tform --display-name "PCF Terraform Service Account"
 
@@ -39,9 +39,12 @@ export BBL_GCP_SERVICE_ACCOUNT_KEY=/home/abefroman/terraform/gcp/keys/pcf-tform.
 ```
 
 ### Pick an Environment Name
+You will be replacing variables shortly that will require this name. Choose a name that you will be comfortable with. Example: pksv1.
 
 ### Modify the SSL Config File
-In the 'ssl' directory modify the contents of the ssl.conf file to suit your environment. Replace all of the variables `DOMAIN.IO` with the domain name you will be using.
+In the 'ssl' directory modify the contents of the ssl.conf file to suit your environment. Replace all of the variables in 'ALL CAPS' with the domain name you will be using.
+
+__*(This example uses RSA-2048 encryption. Currently, only RSA-2048 and ECDSA P-256 encryption are supported by GCP Load Balancers.)*__
 ```
 [ req ]
 default_bits       = 2048
@@ -83,7 +86,9 @@ openssl x509 -req -days 3650 -in private.csr -signkey private.key -out private.c
 ```
 
 ### Modify the Terraform variables file
-Modify pcf.tfvars in the root of the project directory. Replace any ALL CAPS variables with ones that suit your environment.
+Modify pcf.tfvars in the project root directory. Replace any 'ALL CAPS' variables with ones that suit your environment.
+
+__*(In the following three fields `ssl_cert | ssl_key, | service_account_key` paste the contents of your files replacing the `PASTE_CERT_HERE` portion of each.)*__
 ```
 env_name = "PCF"
 project	= "GCP-PROJECT"
@@ -91,18 +96,18 @@ region = "REGION"
 zones = ["ZONE", "ZONE", "ZONE"]
 dns_suffix = "SUB.DOMAIN.IO"
 opsman_image_url = "https://storage.googleapis.com/YOUR.OPSMAN.IMAGE.URL"
-buckets_location = "US"
+buckets_location = "us"
 
 ssl_cert = <<SSL_CERT
-*PASTE CERT HERE*
+PASTE CERT HERE
 SSL_CERT
 
 ssl_private_key = <<SSL_KEY
-*PASTE CERT KEY HERE*
+PASTE CERT KEY HERE
 SSL_KEY
 
 service_account_key = <<SERVICE_ACCOUNT_KEY
-*PASTE SERVICE ACCOUNT KEY HERE*
+PASTE SERVICE ACCOUNT KEY HERE
 SERVICE_ACCOUNT_KEY
 ```
 
@@ -132,7 +137,7 @@ terraform apply pcf.plan
 ```
 
 ### Terraform Apply Output
-Save the output from the `terraform apply pcf.plan` to a local file.
+Save the output from the `terraform apply pcf.plan` to a local file. Example: pcf.out.
 
 
 ### Post Execution Working Directory Structure
