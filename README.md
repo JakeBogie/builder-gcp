@@ -4,9 +4,9 @@
 ## Prerequisites
 The [terraforming-gcp](https://github.com/pivotal-cf/terraforming-gcp/) project from [pivotal-cf](https://github.com/pivotal-cf).
 
-Genevieve's [leftovers](https://github.com/genevieve/leftovers) command for cleaning up IAAS.
+The extremely helpful IaaS cleanup tool [leftovers](https://github.com/genevieve/leftovers) from [genevieve](https://github.com/genevieve).
 
-One more command you might find useful for this project to work really well is [direnv](https://direnv.net/).
+You might find [direnv](https://direnv.net/) useful for this project and also in day to day tasks.
 
 Last but not least you need the [Google Cloud SDK](https://cloud.google.com/sdk/docs/).
 
