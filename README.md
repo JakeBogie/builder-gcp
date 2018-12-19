@@ -2,7 +2,7 @@
 **An install guide to promote mindfulness**
 
 ## Prerequisites
-The [Terraforming GCP](https://github.com/pivotal-cf/terraforming-gcp/) project from Pivotal.
+The [terraforming-gcp](https://github.com/pivotal-cf/terraforming-gcp/) project from Pivotal.
 
 Genevieve's [leftovers](https://github.com/genevieve/leftovers) command for cleaning up IAAS.
 
@@ -154,4 +154,3 @@ builder-gcp-local/
 
 ### Configure
 <!--- SAMPLE COMMENT --->
-
