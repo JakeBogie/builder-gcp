@@ -2,7 +2,7 @@
 **An install guide to promote mindfulness**
 
 ## Prerequisites
-The [terraforming-gcp](https://github.com/pivotal-cf/terraforming-gcp/) project from Pivotal.
+The [terraforming-gcp](https://github.com/pivotal-cf/terraforming-gcp/) project from [pivotal-cf](https://github.com/pivotal-cf).
 
 Genevieve's [leftovers](https://github.com/genevieve/leftovers) command for cleaning up IAAS.
 
@@ -14,7 +14,7 @@ Ready to get started?
 
 ## STAGE 1 - Local Build & Config
 ### Enable GCP API Access for the following APIs:
-(Login to your GCP console and search for APIs & Services)
+Login to your GCP console and search for APIs & Services.
 
   - Identity and Access Management
   - Cloud Resource Manager
@@ -23,7 +23,7 @@ Ready to get started?
   - Compute Engine API
 
 ### GCP Service Account Setup:
-(Perform the following steps in the 'keys' directory and replace the variable `GCP-PROJECT` with your GCP project ID)
+Perform the following steps in the 'keys' directory and replace the variable `GCP-PROJECT` with your GCP project ID.
 ```
 gcloud iam service-accounts create pcf-tform --display-name "PCF Terraform Service Account"
 
@@ -33,7 +33,7 @@ gcloud projects add-iam-policy-binding GCP-PROJECT --member 'serviceAccount:pcf-
 ```
 
 ### Modify your .envrc file
-(Change the path to the absolute path of your pcf-tform.key.json file)
+Change the path to the absolute path of your pcf-tform.key.json file.
 ```
 export BBL_GCP_SERVICE_ACCOUNT_KEY=/home/abefroman/terraform/gcp/keys/pcf-tform.key.json
 ```
@@ -41,7 +41,7 @@ export BBL_GCP_SERVICE_ACCOUNT_KEY=/home/abefroman/terraform/gcp/keys/pcf-tform.
 ### Pick an Environment Name
 
 ### Modify the SSL Config File
-(In the 'ssl' directory modify the contents of the ssl.conf file to suit your environment. Replace all of the variables `DOMAIN.IO` with the domain name you will be using)
+In the 'ssl' directory modify the contents of the ssl.conf file to suit your environment. Replace all of the variables `DOMAIN.IO` with the domain name you will be using.
 ```
 [ req ]
 default_bits       = 2048
@@ -73,7 +73,7 @@ DNS.5	= *.ws.pcf.ENV_NAME.DOMAIN.IO
 ```
 
 ### Create the SSL Certificate
-(Perform this step in the 'ssl' directory)
+Perform this step in the 'ssl' directory.
 ```
 openssl genrsa -out private.key 2048
 
@@ -83,7 +83,7 @@ openssl x509 -req -days 3650 -in private.csr -signkey private.key -out private.c
 ```
 
 ### Modify the Terraform variables file
-(Modify pcf.tfvars in the root of the project directory. Replace any ALL CAPS variables with ones that suit your environment)
+Modify pcf.tfvars in the root of the project directory. Replace any ALL CAPS variables with ones that suit your environment.
 ```
 env_name = "PCF"
 project	= "GCP-PROJECT"
@@ -122,7 +122,7 @@ builder-gcp-local/
 
 ## STAGE 2 - IaaS Build
 ### Initialize Terraform, Create Terraform Plan, and Execute
-(Initialize the local copy of 'terraforming-gcp')
+Initialize the local copy of 'terraforming-gcp'.
 ```
 terraform init /home/abefroman/local-repo/terraforming-gcp/terraforming-pks/
 
@@ -132,7 +132,7 @@ terraform apply pcf.plan
 ```
 
 ### Terraform Apply Output
-(Save the output from the `terraform apply pcf.plan` to a local file.)
+Save the output from the `terraform apply pcf.plan` to a local file.
 
 
 ### Post Execution Working Directory Structure
