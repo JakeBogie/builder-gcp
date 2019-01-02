@@ -114,7 +114,7 @@ SERVICE_ACCOUNT_KEY
 ### Example Working Directory Structure
 ```
 builder-gcp-local/
-├── Readme.md
+├── README.md
 ├── keys
 │   └── pcf-tform.key.json
 ├── pcf.tfvars
@@ -143,7 +143,7 @@ Save the output from the `terraform apply pcf.plan` to a local file. Example: pc
 ### Post Execution Working Directory Structure
 ```
 builder-gcp-local/
-├── Readme.md
+├── README.md
 ├── keys
 │   └── pcf-tform.key.json
 ├── pcf.plan
