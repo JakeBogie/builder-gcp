@@ -137,7 +137,7 @@ terraform apply pcf.plan
 ```
 
 ### Terraform Apply Output
-Save the output from the `terraform apply pcf.plan` to a local file. Example: pcf.out.
+Save the output from the `terraform apply pcf.plan` to a local file. Example: pcf.out. This output will contain IP addressing information along with the URL to login to your Ops Manager.
 
 
 ### Post Execution Working Directory Structure
@@ -157,5 +157,5 @@ builder-gcp-local/
 └── terraform.tfstate
 ```
 
-### Configure
+__You should now have a running Ops Manager that you can configure!__
 <!--- SAMPLE COMMENT --->
