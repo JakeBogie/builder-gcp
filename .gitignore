@@ -1,5 +1,13 @@
+#  Local .terraform directories
+**/.terraform/*
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+# Mac!
 .DS_Store
-terraform.tfstate
-terraform.tfstate
+
+# Local plan & output files
 *.plan
 *.out
