@@ -1,1 +1,0 @@
-This directory is for storing your service account keys.

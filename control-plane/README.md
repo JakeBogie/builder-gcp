@@ -12,36 +12,10 @@ Last but not least you need the [Google Cloud SDK](https://cloud.google.com/sdk/
 
 Ready to get started?
 
-## STAGE 1 - Local Build & Config
-### Enable GCP API Access for the following APIs:
-Login to your GCP console and search for APIs & Services.
+## STAGE 1 - Preparations
 
-  - Identity and Access Management
-  - Cloud Resource Manager
-  - Cloud DNS
-  - Cloud SQL API
-  - Compute Engine API
+Perform the preparation steps from the parent directory then come back here to finish...
 
-Alternately you can perform the following steps via the Google Cloud SDK
-
-### GCP Service Account Setup:
-Perform the following steps in the 'keys' directory and replace the variable `GCP-PROJECT` in the following commands with your GCP project ID.
-```
-gcloud iam service-accounts create pcf-tform --display-name "PCF Terraform Service Account"
-
-gcloud iam service-accounts keys create "pcf-tform.key.json" --iam-account "pcf-tform@GCP-PROJECT.iam.gserviceaccount.com"
-
-gcloud projects add-iam-policy-binding GCP-PROJECT --member 'serviceAccount:pcf-tform@GCP-PROJECT.iam.gserviceaccount.com' --role 'roles/owner'
-```
-
-### Modify your .envrc file
-Change the path to the absolute path of your pcf-tform.key.json file.
-```
-export BBL_GCP_SERVICE_ACCOUNT_KEY=/home/abefroman/terraform/gcp/keys/pcf-tform.key.json
-```
-
-### Pick an Environment Name
-You will be replacing variables shortly that will require this name. Choose a name that you will be comfortable with. Example: pksv1.
 
 ### Modify the SSL Config File
 In the 'ssl' directory modify the contents of the ssl.conf file to suit your environment. Replace all of the variables in 'ALL CAPS' with the domain name you will be using.

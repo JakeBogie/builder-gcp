@@ -12,7 +12,7 @@ Last but not least you need the [Google Cloud SDK](https://cloud.google.com/sdk/
 
 Ready to get started?
 
-## STAGE 1 - Local Build & Config
+## STAGE 1 - Preparations
 ### Enable GCP API Access for the following APIs:
 Login to your GCP console and search for APIs & Services.
 
@@ -42,37 +42,11 @@ export BBL_GCP_SERVICE_ACCOUNT_KEY=/home/abefroman/terraform/gcp/keys/pcf-tform.
 You will be replacing variables shortly that will require this name. Choose a name that you will be comfortable with. Example: pksv1.
 
 ### Modify the SSL Config File
-In the 'ssl' directory modify the contents of the ssl.conf file to suit your environment. Replace all of the variables in 'ALL CAPS' with the domain name you will be using.
+<!--- In the 'ssl' directory modify the contents of the ssl.conf file to suit your environment. Replace all of the variables in 'ALL CAPS' with the domain name you will be using.--->
 
 __*(This example uses RSA-2048 encryption. Currently, only RSA-2048 and ECDSA P-256 encryption are supported by GCP Load Balancers.)*__
 ```
-[ req ]
-default_bits       = 2048
-distinguished_name = req_distinguished_name
-req_extensions     = req_ext
 
-[ req_distinguished_name ]
-countryName                 = Country Name (2 letter code)
-countryName_default         = US
-stateOrProvinceName         = State or Province Name (full name)
-stateOrProvinceName_default = Illinois
-localityName                = Locality Name (eg, city)
-localityName_default        = Chicago
-organizationName            = Organization Name (eg, company)
-organizationName_default    = Froman\'s Fine Meats
-commonName                  = Common Name (e.g. server FQDN or YOUR name)
-commonName_max              = 64
-commonName_default          = *.DOMAIN.IO
-
-[ req_ext ]
-subjectAltName = @alt_names
-
-[alt_names]
-DNS.1   = *.SUB.DOMAIN.IO
-DNS.2   = *.ENV_NAME.SUB.DOMAIN.IO
-DNS.3	= *.sys.ENV_NAME.SUB.DOMAIN.IO
-DNS.4	= *.apps.ENV_NAME.SUB.DOMAIN.IO
-DNS.5	= *.ws.pcf.ENV_NAME.DOMAIN.IO
 ```
 
 ### Create the SSL Certificate

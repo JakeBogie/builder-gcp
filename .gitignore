@@ -5,9 +5,13 @@
 *.tfstate
 *.tfstate.*
 
-# Mac!
+# MacOS!
 .DS_Store
 
-# Local plan & output files
+# Local files
 *.plan
 *.out
+*.secret
+
+# Local terraforming-gcp files
+/terraforming-gcp
