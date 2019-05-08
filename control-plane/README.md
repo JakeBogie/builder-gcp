@@ -1,6 +1,8 @@
 # Pivotal Control-Plane on GCP
 **An install guide to promote PA mindfulness**
 
+For additional reading and help you can visit the docs site for [Control-Plane](https://control-plane-docs.cfapps.io/).
+
 ## Prerequisites
 The [terraforming-gcp](https://github.com/pivotal-cf/terraforming-gcp/) project from [pivotal-cf](https://github.com/pivotal-cf).
 
@@ -12,7 +14,7 @@ Last but not least you need the [Google Cloud SDK](https://cloud.google.com/sdk/
 
 Ready to get started?
 
-## STAGE 1 - Control-Plane Preparations
+## STAGE 1 - Control-Plane preparations
 
 Perform the preparation steps from the parent directory then come back here when you are ready...
 
@@ -35,7 +37,7 @@ opsman_image_url = "https://storage.googleapis.com/YOUR.OPSMAN.IMAGE.URL"
 ```
 
 ### Create the Terraform secrets file
-In your `secrets` directory create a file named `control-plane.secrets.terraform.tfvars` with the contents below, replacing the sections noted below with your own data.
+In your `secrets` directory create a file named `control-plane.secrets.tfvars` with the contents below, replacing the sections noted below with your own data.
 
 __*(In the following three fields paste the contents of your files replacing the `**PASTE_xx_HERE**` portion of each.)*__
 
@@ -57,20 +59,35 @@ service_account_key = <<SERVICE_ACCOUNT_KEY
 SERVICE_ACCOUNT_KEY
 ```
 
-## STAGE 2 - Control-Plane IaaS Build
+## STAGE 2 - Control-Plane IaaS build
 ### Initialize Terraform, Create Terraform Plan, and Execute
-Initialize the local copy of 'terraforming-gcp'.
+Change directory into the local copy of `terraforming-gcp/terraforming-control-plane` and perform the following commands (edit to reflect your file paths). These commands will create two new files `control-plane.terraform.plan` and `control-plane.terraform.out` and they contain sensitive data so be sure to redirect them to your `secrets` directory.
 ```
-terraform init /home/abefroman/local-repo/terraforming-gcp/terraforming-pks/
+terraform init
 
-terraform plan -out pcf.plan -var-file pcf.tfvars /home/abefroman/local-repo/terraforming-gcp/terraforming-pks/
+terraform plan -out /path/to/your/secrets/control-plane.terraform.plan -var-file /path/to/your/control-plane.terraform.tfvars -var-file /path/to/your/secrets/control-plane.secrets.tfvars
 
-terraform apply pcf.plan
+terraform apply -state-out /path/to/your/secrets/control-plane.terraform.out /path/to/your/secrets/control-plane.terraform.plan
 ```
 
-### Terraform Apply Output
-Save the output from the `terraform apply pcf.plan` to a local file. Example: pcf.out. This output will contain IP addressing information along with the URL to login to your Ops Manager.
+### Terraform apply output
+Copy the terminal output from the `terraform apply` command to a local file. Example: 'control-plane.output' This output will contain IP addressing information along with the URL to login to your Ops Manager.
 
+You can also use the `terraform output` command to parse your `control-plane.terraform.out` configuration settings applied by the Terraform apply command.
+
+## STAGE 3 - Configure your Ops Manager & BOSH Director
+### Ops Manager Select an Authentication System
+Using a browser navigate to the URL for your Ops Manager. This can be located in your `control-plane.output` file as the variable named `ops_manager_dns`
+
+### Ops Manager SSL certificate & Pivnet token
+
+
+### BOSH Director
+Use the values provided by your `control-plane.output` to configure the BOSH Director. Use this guide to learn step by step how to configure your director for your GCP.
+
+**Note**: On the `Create Networks Page` only create one network, following the `infrastructure` network guide, and set the `Name` field to `control-plane-subnet`.
+
+[Configuring BOSH Director on GCP](https://docs.pivotal.io/pivotalcf/2-4/om/gcp/config-terraform.html)
 
 __You should now have a running Ops Manager that you can configure!__
 <!--- SAMPLE COMMENT --->

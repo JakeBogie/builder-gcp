@@ -12,16 +12,16 @@ Last but not least you need the [Google Cloud SDK](https://cloud.google.com/sdk/
 
 Ready to get started?
 
-## STAGE 1 - GCP Preparations
+## STAGE 1 - GCP preparations
 These preparation steps should be completed no matter what you are installing: Control-Plane, PAS, or PKS.
 
-### Pick an Environment name
+### Pick an environment name
 You will be replacing variables shortly that will require this name. Choose a name that you will be comfortable with. Example: `pcfv1`. This will be used later on as the following two variables: `env_name` and `ENV_NAME`
 
 ### Clone the terraforming-gcp repository
 Clone the [terraforming-gcp](https://github.com/pivotal-cf/terraforming-gcp/) repository for use.
 
-### Enable GCP API Access for the following APIs:
+### Enable GCP API access for the following APIs:
 Login to your GCP console and search for APIs & Services. Enable each of the APIs listed below:
 
   - Identity and Access Management
@@ -39,7 +39,7 @@ gcloud services enable sqladmin.googleapis.com --async
 gcloud services enable compute.googleapis.com --async
 ```
 
-### GCP Service Account Setup:
+### GCP service account setup:
 Create a secure method of storing credentials and secrets someplace. You will be storing access keys, SSH keys, and certificates in this location. Choose wisely and don't commit credentials out to public repositories.
 
 Perform the following steps in the `secrets` directory and replace the variable `GCP-PROJECT` in the following commands with your GCP project ID.
