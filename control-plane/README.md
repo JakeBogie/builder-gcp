@@ -12,40 +12,52 @@ Last but not least you need the [Google Cloud SDK](https://cloud.google.com/sdk/
 
 Ready to get started?
 
-## STAGE 1 - Preparations
+## STAGE 1 - Control-Plane Preparations
 
-Perform the preparation steps from the parent directory then come back here to finish...
+Perform the preparation steps from the parent directory then come back here when you are ready...
 
 ### Modify the Terraform variables file
-Modify pcf.tfvars in the project root directory. Replace any 'ALL CAPS' variables with ones that suit your environment.
+Modify the `control-plane.terraform.tfvars` file replacing any 'ALL CAPS' variables with ones that suit your environment.
+
+  - env_name: This is the `env_name` or `ENV_NAME` variable that was created in the Prerequisites section
+  - project: This is your GCP project ID
+  - region: This is the region of service you will be using from GCP
+  - zones: This is the availability zone selection you will be using from your GCP region
+  - dns_suffix: This is the DNS suffix or domain name you will be using for this environment (same as used in the SSL certificate).
 
 ```
 env_name = "PCF"
-project	= "GCP-PROJECT"
+project	= "GCP_PROJECT"
 region = "REGION"
 zones = ["ZONE", "ZONE", "ZONE"]
-dns_suffix = "SUB.DOMAIN.IO"
+dns_suffix = "DOMAIN.IO"
 opsman_image_url = "https://storage.googleapis.com/YOUR.OPSMAN.IMAGE.URL"
 ```
 
-### Modify the Terraform secrets file
+### Create the Terraform secrets file
+In your `secrets` directory create a file named `control-plane.secrets.terraform.tfvars` with the contents below, replacing the sections noted below with your own data.
 
-__*(In the following three fields `ssl_cert | ssl_key, | service_account_key` paste the contents of your files replacing the `PASTE_CERT_HERE` portion of each.)*__
+__*(In the following three fields paste the contents of your files replacing the `**PASTE_xx_HERE**` portion of each.)*__
+
+  - SSL_CERT: This is the contents of the wildcard SSL certificate you created in the Prerequisites
+  - SSL_PRIVATE_KEY: This is the contents of the wildcard SSL certificate key you created in the Prerequisites
+  - SERIVICE_ACCOUNT_KEY: This is the contents of the pcf-tform.key.json you created in the Prerequisites
+
 ```
 ssl_cert = <<SSL_CERT
-PASTE CERT HERE
+**PASTE_SSL_CERT_HERE**
 SSL_CERT
 
 ssl_private_key = <<SSL_KEY
-PASTE CERT KEY HERE
+**PASTE_SSL_PRIVATE_KEY_HERE**
 SSL_KEY
 
 service_account_key = <<SERVICE_ACCOUNT_KEY
-PASTE SERVICE ACCOUNT KEY HERE
+**PASTE_SERVICE_ACCOUNT_KEY_HERE**
 SERVICE_ACCOUNT_KEY
 ```
 
-## STAGE 2 - IaaS Build
+## STAGE 2 - Control-Plane IaaS Build
 ### Initialize Terraform, Create Terraform Plan, and Execute
 Initialize the local copy of 'terraforming-gcp'.
 ```
@@ -59,23 +71,6 @@ terraform apply pcf.plan
 ### Terraform Apply Output
 Save the output from the `terraform apply pcf.plan` to a local file. Example: pcf.out. This output will contain IP addressing information along with the URL to login to your Ops Manager.
 
-
-### Post Execution Working Directory Structure
-```
-builder-gcp-local/
-├── README.md
-├── keys
-│   └── pcf-tform.key.json
-├── pcf.plan
-├── pcf.tfvars
-├── ssl
-│   ├── private.crt
-│   ├── private.csr
-│   ├── private.key
-│   └── ssl.conf
-├── terraform.apply.out
-└── terraform.tfstate
-```
 
 __You should now have a running Ops Manager that you can configure!__
 <!--- SAMPLE COMMENT --->

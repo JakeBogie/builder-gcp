@@ -12,7 +12,7 @@ Last but not least you need the [Google Cloud SDK](https://cloud.google.com/sdk/
 
 Ready to get started?
 
-## STAGE 1 - Preparations
+## STAGE 1 - GCP Preparations
 These preparation steps should be completed no matter what you are installing: Control-Plane, PAS, or PKS.
 
 ### Pick an Environment name
@@ -43,6 +43,8 @@ gcloud services enable compute.googleapis.com --async
 Create a secure method of storing credentials and secrets someplace. You will be storing access keys, SSH keys, and certificates in this location. Choose wisely and don't commit credentials out to public repositories.
 
 Perform the following steps in the `secrets` directory and replace the variable `GCP-PROJECT` in the following commands with your GCP project ID.
+
+This will create a `pcf-tform.key.json` file that you will use later in the setup of your Control-Plane, PAS, or PKS environments.
 ```
 gcloud iam service-accounts create pcf-tform --display-name "PCF Terraform Service Account"
 
@@ -61,8 +63,8 @@ export BBL_GCP_SERVICE_ACCOUNT_KEY=/home/abefroman/terraform/gcp/keys/pcf-tform.
 ### Create a SSL config file
 In your `secrets` directory copy the contents below into an `ssl.conf` file. Replace all of the following variables with the names you will be using:
 
-  - `DOMAIN.IO` this variable is for the domain name that you will be using.
-  - `ENV_NAME`  this variable is the one you created above.
+  - DOMAIN.IO: This variable is for the domain name that you will be using.
+  - ENV_NAME: This variable is the one you created above.
 
 __*(This example uses RSA-2048 encryption. Currently, only RSA-2048 and ECDSA P-256 encryption are supported by GCP Load Balancers.)*__
 ```
@@ -117,3 +119,4 @@ openssl x509 -req -in wildcard.ENV_NAME.DOMAIN.IO.csr -CA ../ca/bogie.io.pem -CA
 ```
 
 __You are now ready to move on to building either a Control-Plane, PAS, or PKS instance.__
+<!--- SAMPLE COMMENT --->
