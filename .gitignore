@@ -1,17 +1,19 @@
-#  Local .terraform directories
+#  Local .terraform directories and files
 **/.terraform/*
 
 # .tfstate files
 *.tfstate
 *.tfstate.*
 
+#  Terraform secret variables
+*.secret.tfvars
+
 # MacOS!
 .DS_Store
 
-# Local files
+# Local plan and output files
 *.plan
 *.out
-*.secret
 
 # Local terraforming-gcp files
 /terraforming-gcp

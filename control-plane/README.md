@@ -17,49 +17,6 @@ Ready to get started?
 Perform the preparation steps from the parent directory then come back here to finish...
 
 
-### Modify the SSL Config File
-In the 'ssl' directory modify the contents of the ssl.conf file to suit your environment. Replace all of the variables in 'ALL CAPS' with the domain name you will be using.
-
-__*(This example uses RSA-2048 encryption. Currently, only RSA-2048 and ECDSA P-256 encryption are supported by GCP Load Balancers.)*__
-```
-[ req ]
-default_bits       = 2048
-distinguished_name = req_distinguished_name
-req_extensions     = req_ext
-
-[ req_distinguished_name ]
-countryName                 = Country Name (2 letter code)
-countryName_default         = US
-stateOrProvinceName         = State or Province Name (full name)
-stateOrProvinceName_default = Illinois
-localityName                = Locality Name (eg, city)
-localityName_default        = Chicago
-organizationName            = Organization Name (eg, company)
-organizationName_default    = Froman\'s Fine Meats
-commonName                  = Common Name (e.g. server FQDN or YOUR name)
-commonName_max              = 64
-commonName_default          = *.DOMAIN.IO
-
-[ req_ext ]
-subjectAltName = @alt_names
-
-[alt_names]
-DNS.1   = *.SUB.DOMAIN.IO
-DNS.2   = *.ENV_NAME.SUB.DOMAIN.IO
-DNS.3	= *.sys.ENV_NAME.SUB.DOMAIN.IO
-DNS.4	= *.apps.ENV_NAME.SUB.DOMAIN.IO
-DNS.5	= *.ws.pcf.ENV_NAME.DOMAIN.IO
-```
-
-### Create the SSL Certificate
-Perform this step in the 'ssl' directory.
-```
-openssl genrsa -out private.key 2048
-
-openssl req -new -sha256 -out private.csr -key private.key -config ssl.conf
-
-openssl x509 -req -days 3650 -in private.csr -signkey private.key -out private.crt -extensions req_ext -extfile ssl.conf
-```
 
 ### Modify the Terraform variables file
 Modify pcf.tfvars in the project root directory. Replace any 'ALL CAPS' variables with ones that suit your environment.
@@ -72,8 +29,9 @@ region = "REGION"
 zones = ["ZONE", "ZONE", "ZONE"]
 dns_suffix = "SUB.DOMAIN.IO"
 opsman_image_url = "https://storage.googleapis.com/YOUR.OPSMAN.IMAGE.URL"
-buckets_location = "us"
-
+```
+### Modify the Terraform secrets file
+```
 ssl_cert = <<SSL_CERT
 PASTE CERT HERE
 SSL_CERT
