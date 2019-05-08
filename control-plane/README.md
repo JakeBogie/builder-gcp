@@ -15,7 +15,6 @@ Last but not least you need the [Google Cloud SDK](https://cloud.google.com/sdk/
 Ready to get started?
 
 ## STAGE 1 - Control-Plane preparations
-
 Perform the preparation steps from the parent directory then come back here when you are ready...
 
 ### Modify the Terraform variables file
@@ -74,6 +73,9 @@ terraform apply -state-out /path/to/your/secrets/control-plane.terraform.out /pa
 Copy the terminal output from the `terraform apply` command to a local file. Example: 'control-plane.output' This output will contain IP addressing information along with the URL to login to your Ops Manager.
 
 You can also use the `terraform output` command to parse your `control-plane.terraform.out` configuration settings applied by the Terraform apply command.
+
+### DNS changes
+You will now need to make changes to the authoritative DNS servers for the zone (domain) that you are using for this environment. Making those changes are beyond the scope of this walkthrough. The name servers for your environment in GCP were allocated by the Terraform commands. This can be located in your `control-plane.output` file as the variable named `env_dns_zone_name_servers`.
 
 ## STAGE 3 - Configure your Ops Manager & BOSH Director
 ### Ops Manager Select an Authentication System
