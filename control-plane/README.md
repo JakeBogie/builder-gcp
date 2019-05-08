@@ -16,12 +16,9 @@ Ready to get started?
 
 Perform the preparation steps from the parent directory then come back here to finish...
 
-
-
 ### Modify the Terraform variables file
 Modify pcf.tfvars in the project root directory. Replace any 'ALL CAPS' variables with ones that suit your environment.
 
-__*(In the following three fields `ssl_cert | ssl_key, | service_account_key` paste the contents of your files replacing the `PASTE_CERT_HERE` portion of each.)*__
 ```
 env_name = "PCF"
 project	= "GCP-PROJECT"
@@ -30,7 +27,10 @@ zones = ["ZONE", "ZONE", "ZONE"]
 dns_suffix = "SUB.DOMAIN.IO"
 opsman_image_url = "https://storage.googleapis.com/YOUR.OPSMAN.IMAGE.URL"
 ```
+
 ### Modify the Terraform secrets file
+
+__*(In the following three fields `ssl_cert | ssl_key, | service_account_key` paste the contents of your files replacing the `PASTE_CERT_HERE` portion of each.)*__
 ```
 ssl_cert = <<SSL_CERT
 PASTE CERT HERE
@@ -43,20 +43,6 @@ SSL_KEY
 service_account_key = <<SERVICE_ACCOUNT_KEY
 PASTE SERVICE ACCOUNT KEY HERE
 SERVICE_ACCOUNT_KEY
-```
-
-### Example Working Directory Structure
-```
-builder-gcp-local/
-├── README.md
-├── keys
-│   └── pcf-tform.key.json
-├── pcf.tfvars
-└── ssl
-    ├── private.crt
-    ├── private.csr
-    ├── private.key
-    └── ssl.conf
 ```
 
 ## STAGE 2 - IaaS Build

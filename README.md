@@ -1,4 +1,4 @@
-# Pivotal stuff on GCP for Platform Architects
+# Pivotal PCF on GCP for Platform Architects
 **An install guide to promote PA mindfulness**
 
 ## Prerequisites
@@ -16,10 +16,10 @@ Ready to get started?
 These preparation steps should be completed no matter what you are installing: Control-Plane, PAS, or PKS.
 
 ### Pick an Environment name
-You will be replacing variables shortly that will require this name. Choose a name that you will be comfortable with. Example: pcfv1. This will be used later on as the following two variables: `env_name` and `ENV_NAME`
+You will be replacing variables shortly that will require this name. Choose a name that you will be comfortable with. Example: `pcfv1`. This will be used later on as the following two variables: `env_name` and `ENV_NAME`
 
 ### Clone the terraforming-gcp repository
-In this local working directory clone the [terraforming-gcp](https://github.com/pivotal-cf/terraforming-gcp/) repository for use.
+Clone the [terraforming-gcp](https://github.com/pivotal-cf/terraforming-gcp/) repository for use.
 
 ### Enable GCP API Access for the following APIs:
 Login to your GCP console and search for APIs & Services. Enable each of the APIs listed below:
@@ -59,10 +59,10 @@ export BBL_GCP_SERVICE_ACCOUNT_KEY=/home/abefroman/terraform/gcp/keys/pcf-tform.
 ```
 
 ### Create a SSL config file
-In your `secrets` directory copy the contents below into an ssl.conf file. Replace all of the following variables with the names you will be using:
+In your `secrets` directory copy the contents below into an `ssl.conf` file. Replace all of the following variables with the names you will be using:
 
-  - `DOMAIN.IO`
-  - `ENV_NAME` variable is the one you created above.
+  - `DOMAIN.IO` this variable is for the domain name that you will be using.
+  - `ENV_NAME`  this variable is the one you created above.
 
 __*(This example uses RSA-2048 encryption. Currently, only RSA-2048 and ECDSA P-256 encryption are supported by GCP Load Balancers.)*__
 ```
@@ -89,30 +89,31 @@ subjectAltName = @alt_names
 
 [alt_names]
 DNS.1 = *.ENV_NAME.DOMAIN.IO
-DNS.2	= *.sys.ENV_NAME.DOMAIN.IO
-DNS.3	= *.apps.ENV_NAME.DOMAIN.IO
-DNS.5	= *.login.system.ENV_NAME.DOMAIN.IO
-DNS.6	= *.uaa.system.ENV_NAME.DOMAIN.IO
+DNS.2 = *.sys.ENV_NAME.DOMAIN.IO
+DNS.3 = *.apps.ENV_NAME.DOMAIN.IO
+DNS.5 = *.login.system.ENV_NAME.DOMAIN.IO
+DNS.6 = *.uaa.system.ENV_NAME.DOMAIN.IO
 ```
 
 ### Create a wildcard SSL certificate for all of your PCF components (browser SSL errors are annoying)
+Perform the following steps in your `secrets` directory.
 
 ```
-openssl genrsa -out wildcard.fmj.gcp.bogie.io.key 2048
+openssl genrsa -out wildcard.ENV_NAME.DOMAIN.IO.key 2048
 
-openssl req -new -sha256 -key wildcard.fmj.gcp.bogie.io.key -out wildcard.fmj.gcp.bogie.io.csr -config wildcard.fmj.gcp.bogie.io.conf
+openssl req -new -sha256 -key wildcard.ENV_NAME.DOMAIN.IO.key -out wildcard.wildcard.ENV_NAME.DOMAIN.IO.csr -config wildcard.ENV_NAME.DOMAIN.IO.conf
 ```
 
 Use this command to sign the cert with it's own key. __See below if you have a CA cert you can sign with.__
 
 ```
-openssl x509 -req -in wildcard.fmj.gcp.bogie.io.csr -out wildcard.fmj.gcp.bogie.io.crt2 -days 3650 -sha256 -extensions req_ext -extfile wildcard.fmj.gcp.bogie.io.conf -signkey wildcard.fmj.gcp.bogie.io.key
+openssl x509 -req -in wildcard.ENV_NAME.DOMAIN.IO.csr -out wildcard.ENV_NAME.DOMAIN.IO.io.crt2 -days 3650 -sha256 -extensions req_ext -extfile wildcard.ENV_NAME.DOMAIN.IO.conf -signkey wildcard.ENV_NAME.DOMAIN.IO.key
 ```
 
-__Use this command if you have a CA cert that you can sign the cert with that you trust. :)__
+Use this command __if you have a CA cert__ that you can sign the cert with that you trust. :)
 
 ```
-openssl x509 -req -in wildcard.fmj.gcp.bogie.io.csr -CA ../ca/bogie.io.pem -CAkey ../ca/bogie.io.key -CAcreateserial -out wildcard.fmj.gcp.bogie.io.crt -days 3650 -sha256 -extensions req_ext -extfile wildcard.fmj.gcp.bogie.io.conf
+openssl x509 -req -in wildcard.ENV_NAME.DOMAIN.IO.csr -CA ../ca/bogie.io.pem -CAkey ../ca/bogie.io.key -CAcreateserial -out wildcard.ENV_NAME.DOMAIN.IO.crt -days 3650 -sha256 -extensions req_ext -extfile wildcard.ENV_NAME.DOMAIN.IO.conf
 ```
 
 __You are now ready to move on to building either a Control-Plane, PAS, or PKS instance.__
