@@ -79,10 +79,23 @@ You will now need to make changes to the authoritative DNS servers for the zone 
 
 ## STAGE 3 - Configure your Ops Manager & BOSH Director
 ### Ops Manager Select an Authentication System
-Using a browser navigate to the URL for your Ops Manager. This can be located in your `control-plane.output` file as the variable named `ops_manager_dns`
+Using a browser navigate to the URL for your Ops Manager. This can be located in your `control-plane.output` file as the variable named `ops_manager_dns`. It is recommended for this walkthrough that you use the `Internal Authentication` setting.
+
+When redirected to the Internal Authentication page, do the following:
+
+  - Enter a Username, Password, and Password confirmation to create an Admin user.
+  - Enter a Decryption passphrase and the Decryption passphrase confirmation. This passphrase encrypts the Ops Manager datastore, and is not recoverable if lost.
+  - Read the End User License Agreement, and select the checkbox to accept the terms.
+  - Click Setup Authentication.
+
+After a few moment of processing you should be able to login to your Ops Manager.
 
 ### Ops Manager SSL certificate & Pivnet token
+Once logged into your Ops Manager instance navigat to the top right corner of the page and click your username and go to the 'Settings' page. On the left navigation bar click on 'SSL Certificate'. Here you will enter the contents of your wildcard SSL certificate and wildcard SSL certificate key files then click 'Add Certificate'.
 
+On the left navigation bar click on 'Pivotal Network Settings' and enter your Pivotal Network Legacy API token into the field 'Set API Token'. Click 'Add Token' to save the token.
+
+You should now be able to log out of the Ops Manager instance and log back in with a trusted SSL connection.
 
 ### BOSH Director
 Use the values provided by your `control-plane.output` to configure the BOSH Director. Use this guide to learn step by step how to configure your director for your GCP.
@@ -91,5 +104,4 @@ Use the values provided by your `control-plane.output` to configure the BOSH Dir
 
 [Configuring BOSH Director on GCP](https://docs.pivotal.io/pivotalcf/2-4/om/gcp/config-terraform.html)
 
-__You should now have a running Ops Manager that you can configure!__
 <!--- SAMPLE COMMENT --->
