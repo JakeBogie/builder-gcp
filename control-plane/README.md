@@ -33,6 +33,7 @@ region = "REGION"
 zones = ["ZONE", "ZONE", "ZONE"]
 dns_suffix = "DOMAIN.IO"
 opsman_image_url = "https://storage.googleapis.com/YOUR.OPSMAN.IMAGE.URL"
+opsman_storage_bucket_count = "1"
 ```
 
 ### Create the Terraform secrets file
@@ -91,7 +92,7 @@ When redirected to the Internal Authentication page, do the following:
 After a few moment of processing you should be able to login to your Ops Manager.
 
 ### Ops Manager SSL certificate & Pivnet token
-Once logged into your Ops Manager instance navigat to the top right corner of the page and click your username and go to the 'Settings' page. On the left navigation bar click on 'SSL Certificate'. Here you will enter the contents of your wildcard SSL certificate and wildcard SSL certificate key files then click 'Add Certificate'.
+Once logged into your Ops Manager instance navigate to the top right corner of the page and click your username and go to the 'Settings' page. On the left navigation bar click on 'SSL Certificate'. Here you will enter the contents of your wildcard SSL certificate and wildcard SSL certificate key files then click 'Add Certificate'.
 
 On the left navigation bar click on 'Pivotal Network Settings' and enter your Pivotal Network Legacy API token into the field 'Set API Token'. Click 'Add Token' to save the token.
 
@@ -104,4 +105,14 @@ Use the values provided by your `control-plane.output` to configure the BOSH Dir
 
 [Configuring BOSH Director on GCP](https://docs.pivotal.io/pivotalcf/2-4/om/gcp/config-terraform.html)
 
+**Note**: During the Terraform steps a GCS Storage Bucket was created for use as your Blobstore. During the Director configuration refer to these folowing variables that were set during the Terraform process to enable the use of GCS as your Blobstore:
+  - director_blobstore_bucket
+  - director_blobstore_service_account_key
+
+### Export Ops Manager Installation Settings
+Logged into your Ops Manager instance navigate to the top right corner of the page and click your username and go to the 'Settings' page. On the left navigation bar click on 'Export Installation Settings'. Now click on the 'Export Installation Settings' button to save a local copy of the Ops Manager configuration for later use.
+
+**Note**: Your decryption passphrase will be needed to restore this configuration after a re-installation or an upgrade.
+
+## STAGE 4 -
 <!--- SAMPLE COMMENT --->
