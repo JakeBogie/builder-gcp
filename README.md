@@ -115,7 +115,7 @@ openssl x509 -req -in wildcard.ENV_NAME.DOMAIN.IO.csr -out wildcard.ENV_NAME.DOM
 Use this command __if you have a CA cert__ that you can sign the cert with that you trust. :)
 
 ```
-openssl x509 -req -in wildcard.ENV_NAME.DOMAIN.IO.csr -CA ../ca/bogie.io.pem -CAkey ../ca/bogie.io.key -CAcreateserial -out wildcard.ENV_NAME.DOMAIN.IO.crt -days 3650 -sha256 -extensions req_ext -extfile wildcard.ENV_NAME.DOMAIN.IO.conf
+openssl x509 -req -in wildcard.ENV_NAME.DOMAIN.IO.csr -CA ../ca/DOMAIN.IO.pem -CAkey ../ca/DOMAIN.IO.key -CAcreateserial -out wildcard.ENV_NAME.DOMAIN.IO.crt -days 3650 -sha256 -extensions req_ext -extfile wildcard.ENV_NAME.DOMAIN.IO.conf
 ```
 
 __You are now ready to move on to building either a Control-Plane, PAS, or PKS instance.__
