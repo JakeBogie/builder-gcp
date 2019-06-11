@@ -103,7 +103,7 @@ Perform the following steps in your `secrets` directory.
 ```
 openssl genrsa -out wildcard.ENV_NAME.DOMAIN.IO.key 2048
 
-openssl req -new -sha256 -key wildcard.ENV_NAME.DOMAIN.IO.key -out wildcard.wildcard.ENV_NAME.DOMAIN.IO.csr -config wildcard.ENV_NAME.DOMAIN.IO.conf
+openssl req -new -sha256 -key wildcard.ENV_NAME.DOMAIN.IO.key -out wildcard.ENV_NAME.DOMAIN.IO.csr -config wildcard.ENV_NAME.DOMAIN.IO.conf
 ```
 
 Use this command to sign the cert with it's own key. __See below if you have a CA cert you can sign with.__
