@@ -109,7 +109,7 @@ openssl req -new -sha256 -key wildcard.ENV_NAME.DOMAIN.IO.key -out wildcard.ENV_
 Use this command to sign the cert with it's own key. __See below if you have a CA cert you can sign with.__
 
 ```
-openssl x509 -req -in wildcard.ENV_NAME.DOMAIN.IO.csr -out wildcard.ENV_NAME.DOMAIN.IO.io.crt -days 3650 -sha256 -extensions req_ext -extfile wildcard.ENV_NAME.DOMAIN.IO.conf -signkey wildcard.ENV_NAME.DOMAIN.IO.key
+openssl x509 -req -in wildcard.ENV_NAME.DOMAIN.IO.csr -out wildcard.ENV_NAME.DOMAIN.IO.io.crt -days 1095 -sha256 -extensions req_ext -extfile wildcard.ENV_NAME.DOMAIN.IO.conf -signkey wildcard.ENV_NAME.DOMAIN.IO.key
 ```
 
 Use this command __if you have a CA cert__ that you can sign the cert with that you trust. :)
